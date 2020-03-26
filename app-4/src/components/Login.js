@@ -16,7 +16,7 @@ class Login extends Component{
         this.setState({password: e.target.value})
     }
     handleLogin(){
-        alert `Username: ${this.state.username} Password: ${this.state.password}`
+        alert (`Username: ${this.state.username} Password: ${this.state.password}`)
     }
     render (){
         return(

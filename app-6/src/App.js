@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import Todo from './components/Todo'
 
-function App() {
+
+class App extends Component{
+  constructor(){
+    super()
+      this.state = {
+        list:[],
+        user: ''
+      }
+      this.handleAddTodoList = this.handleAddTodoList.bind(this)
+    }
+  handleAddTodoList(){
+    this.setState({
+      list: [...this.state.list, this.state.user]
+      // would love more clarity on what this does. what the spread operator does. 
+    })
+  }
+  handleUserChange(val){
+    this.setState({user: val})
+  }
+  render(){
+    let list = this.state.list.map((e,i) => {
+      return <Todo key={i} task={e}/>
+    })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+      <h1>My to-do list:</h1>
+      <div>
+        <input
+          value={this.state.user}
+          placeholder='Enter Todo'
+          onChange={e => this.handleUserChange(e.target.value)}        
+        />
+        <button onClick={this.handleAddTodoList}>Add to List</button>
+      </div>
 
-export default App;
+     {list}
+
+    </div>
+  )
+}
+}
+export default App
